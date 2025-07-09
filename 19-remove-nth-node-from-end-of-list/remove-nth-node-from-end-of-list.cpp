@@ -15,23 +15,18 @@ public:
             return NULL;
         }
         
-        //else if
-        
-        ListNode* temp = head;
-        int cnt = 0,cnt1=0;
-        while(temp!=NULL){
-            cnt++;
-            temp=temp->next;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        for(int i=0;i<n;i++) fast = fast->next;
+        if(fast==NULL ) return head->next;
+        while(fast->next!=NULL){
+            fast = fast->next;
+            slow = slow->next;
+
         }
-        int k = cnt - n;
-        if(k==0) return head->next;
-        temp=head;
-        while(temp!=NULL){
-            cnt1++;
-            if(k==cnt1) temp->next=temp->next->next;
-            
-            temp=temp->next;
-        }
+        ListNode* delNode = slow->next;
+        slow->next=slow->next->next;
+       
         return head;
     }
 };
